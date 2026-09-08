@@ -1792,7 +1792,11 @@ function openModal(curadorId){
       </div>`).join('')
     : '<p style="color:var(--gray);font-size:14px;margin:0;">Nenhuma indicação cadastrada.</p>';
   document.getElementById('modalIndicacoes').querySelectorAll('[data-indicacao-id]').forEach(row=>{
-    row.addEventListener('click', ()=>{ closeModal(); openIndicacaoModal(Number(row.dataset.indicacaoId)); });
+    row.addEventListener('click', ()=>{
+      returnToCuradorId = curadorId;
+      closeModal();
+      openIndicacaoModal(Number(row.dataset.indicacaoId));
+    });
   });
 
   const backdrop = document.getElementById('modalBackdrop');
@@ -1903,6 +1907,9 @@ function openIndicacaoModal(indicacaoId){
 function closeIndicacaoModal(){
   document.getElementById('indicacaoModalBackdrop').classList.remove('open');
   document.body.style.overflow = '';
+  const curadorId = returnToCuradorId;
+  returnToCuradorId = null;
+  if(curadorId) openModal(curadorId);
 }
 document.getElementById('indicacaoModalClose').addEventListener('click', closeIndicacaoModal);
 document.getElementById('indicacaoModalBackdrop').addEventListener('click', (e)=>{
@@ -1911,6 +1918,7 @@ document.getElementById('indicacaoModalBackdrop').addEventListener('click', (e)=
 document.getElementById('indicacaoModalCurador').addEventListener('click', (e)=>{
   e.preventDefault();
   const curId = e.currentTarget.dataset.curador;
+  returnToCuradorId = null;
   closeIndicacaoModal();
   openModal(curId);
 });
