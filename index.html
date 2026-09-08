@@ -63,20 +63,6 @@
   /* ---------- bracket signature element ---------- */
   .bracket{position:relative;display:inline-block;}
   .bracket svg{display:block;}
-  .brk-frame{position:relative;}
-  .brk-frame::before,
-  .brk-frame::after{
-    content:"";
-    position:absolute;
-    width:22px;height:22px;
-    border:3px solid var(--blue);
-    opacity:0;
-    transition:opacity .35s ease, transform .35s ease;
-  }
-  .brk-frame::before{top:-8px;left:-8px;border-right:none;border-bottom:none;transform:translate(6px,6px);}
-  .brk-frame::after{bottom:-8px;right:-8px;border-left:none;border-top:none;transform:translate(-6px,-6px);}
-  .brk-frame:hover::before,
-  .brk-frame:hover::after{opacity:1;transform:translate(0,0);}
 
   /* ---------- top nav ---------- */
   header{
@@ -638,13 +624,6 @@
   }
   .video-thumb .play-btn svg{width:16px;}
   .video-thumb .featured-dur{font-size:11.5px;padding:3px 8px;}
-  .video-thumb .frame-corner{
-    position:absolute;width:16px;height:16px;border:2px solid rgba(255,255,255,.85);opacity:0;
-    transition:opacity .2s ease;
-  }
-  .video-card:hover .frame-corner{opacity:1;}
-  .fc-tl{top:10px;left:10px;border-right:none;border-bottom:none;}
-  .fc-br{bottom:10px;right:10px;border-left:none;border-top:none;}
   .video-body{padding:16px 18px 20px;}
   .video-body .tag{margin-bottom:12px;}
   .video-body h4{font-size:19px;line-height:1.15;margin-bottom:14px;min-height:44px;}
@@ -1048,7 +1027,7 @@
       <span class="featured-blob" style="width:260px;height:260px;background:var(--blue);top:-50px;left:60px;"></span>
       <span class="featured-blob" style="width:180px;height:180px;background:var(--rust);bottom:-40px;right:50px;"></span>
       <span class="featured-blob" style="width:100px;height:100px;background:var(--red);top:40%;right:-20px;"></span>
-      <a href="#" class="featured-media brk-frame" aria-label="Assistir vídeo em destaque" data-video-id="0">
+      <a href="#" class="featured-media" aria-label="Assistir vídeo em destaque" data-video-id="0">
         <img class="featured-cover" src="capa-DciwgFfOgPi.jpg" alt="Capa do vídeo em destaque">
       </a>
       <p class="featured-note">Conteúdo real do Instagram do Hub Criminal.</p>
@@ -1593,8 +1572,6 @@ function renderVideoCard(v, i, cardClass){
   <div class="${cls} reveal" style="transition-delay:${delay}ms;" data-cat="${v.cat}" data-curador="${v.curador}">
     <a href="#" class="video-thumb" style="background:linear-gradient(135deg, ${cat.hex} 0%, #0a1550 120%);" aria-label="Assistir: ${v.titulo}" data-video-id="${v.id}">
       ${v.cover ? `<img class="video-cover" src="${v.cover}" alt="Capa do conteúdo: ${v.titulo}" loading="lazy">` : catIconSvg(v.cat, 110)}
-      <span class="frame-corner fc-tl"></span>
-      <span class="frame-corner fc-br"></span>
       <span class="featured-dur">${v.dur}</span>
     </a>
     <div class="video-body">
