@@ -1772,7 +1772,11 @@ function openModal(curadorId){
     </div>`;
   }).join('');
   document.getElementById('modalVideos').querySelectorAll('[data-video-id]').forEach(row=>{
-    row.addEventListener('click', ()=>{ closeModal(); openVideoModal(Number(row.dataset.videoId)); });
+    row.addEventListener('click', ()=>{
+      returnToCuradorId = curadorId;
+      closeModal();
+      openVideoModal(Number(row.dataset.videoId));
+    });
   });
 
   const indicacoes = INDICACOES.filter(indicacao => indicacao.curador === curadorId);
@@ -1799,6 +1803,7 @@ function closeModal(){
   document.getElementById('modalBackdrop').classList.remove('open');
   document.body.style.overflow = '';
 }
+let returnToCuradorId = null;
 document.getElementById('modalClose').addEventListener('click', closeModal);
 document.getElementById('modalBackdrop').addEventListener('click', (e)=>{
   if(e.target.id === 'modalBackdrop') closeModal();
@@ -1854,6 +1859,9 @@ function openVideoModal(videoId){
 function closeVideoModal(){
   document.getElementById('videoModalBackdrop').classList.remove('open');
   document.body.style.overflow = '';
+  const curadorId = returnToCuradorId;
+  returnToCuradorId = null;
+  if(curadorId) openModal(curadorId);
 }
 document.getElementById('videoModalClose').addEventListener('click', closeVideoModal);
 document.getElementById('videoModalBackdrop').addEventListener('click', (e)=>{
@@ -1862,6 +1870,7 @@ document.getElementById('videoModalBackdrop').addEventListener('click', (e)=>{
 document.getElementById('videoModalCurador').addEventListener('click', (e)=>{
   e.preventDefault();
   const curId = e.currentTarget.dataset.curador;
+  returnToCuradorId = null;
   closeVideoModal();
   openModal(curId);
 });
@@ -1971,11 +1980,14 @@ document.querySelectorAll('.stats-number[data-count]').forEach(numberEl=>{
 
 const menuLinks = [...document.querySelectorAll('.nav-links a, .mobile-menu a')];
 const desktopMenuLinks = [...document.querySelectorAll('.nav-links a')];
-function clearDesktopMenuSelection(){
-  desktopMenuLinks.forEach(link => link.classList.remove('active'));
+const navSectionIds = ['missao','curadores','biblioteca','indicacoes','contato'];
+function setActiveNav(sectionId){
+  menuLinks.forEach(link=>{
+    link.classList.toggle('active', link.getAttribute('href') === `#${sectionId}`);
+  });
 }
 menuLinks.forEach(link=>link.addEventListener('click', ()=>{
-  menuLinks.forEach(item=>item.classList.toggle('active', item.getAttribute('href') === link.getAttribute('href')));
+  setActiveNav(link.getAttribute('href').slice(1));
 }));
 
 /* ---------- reveal ao rolar ---------- */
@@ -2021,7 +2033,13 @@ const backToTopBtn = document.getElementById('backToTop');
 window.addEventListener('scroll', ()=>{
   headerEl?.classList.toggle('scrolled', window.scrollY > 10);
   backToTopBtn?.classList.toggle('show', window.scrollY > 600);
-  if(window.scrollY <= 10) clearDesktopMenuSelection();
+  const marker = window.scrollY + (headerEl?.offsetHeight || 64) + 24;
+  let currentSection = 'topo';
+  navSectionIds.forEach(sectionId=>{
+    const section = document.getElementById(sectionId);
+    if(section && section.offsetTop <= marker) currentSection = sectionId;
+  });
+  setActiveNav(currentSection);
 }, {passive:true});
 backToTopBtn?.addEventListener('click', ()=>{
   window.scrollTo({top:0, behavior:'smooth'});
