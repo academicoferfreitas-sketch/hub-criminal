@@ -1654,7 +1654,7 @@ function renderIndicacoes(){
 function renderCuradores(){
   const wrap = document.getElementById('curadorGrid');
   wrap.innerHTML = CURADORES.map((c, i) => `
-    <div class="curador-card-v2 reveal" style="transition-delay:${(i % 4) * 80}ms;">
+    <div class="curador-card-v2" style="transition-delay:${(i % 4) * 80}ms;">
       <button class="curador-photo" data-curador="${c.id}" style="background:${c.foto ? 'transparent' : `linear-gradient(160deg, ${c.cor} 0%, #0a1550 150%)`};" aria-label="Ver perfil de ${c.nome}">
         ${c.foto ? `<img src="${c.foto}" alt="${c.nome}" class="curador-photo-img">` : `<span class="initials">${c.iniciais}</span>`}
       </button>
