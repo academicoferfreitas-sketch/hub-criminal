@@ -603,10 +603,14 @@
   .video-grid::-webkit-scrollbar{display:none;}
   @media(max-width:960px){.video-grid{grid-auto-columns:300px;}}
   @media(max-width:700px){
-    .video-grid{grid-template-rows:repeat(1, auto);grid-auto-columns:82%;}
+    .video-grid{grid-template-rows:repeat(1, auto);grid-auto-columns:78%;}
+    .video-thumb{aspect-ratio:16/10;}
+    .video-body{padding:12px 14px 15px;}
+    .video-body .tag{margin-bottom:9px;}
+    .video-body h4{font-size:17px;line-height:1.12;margin-bottom:10px;min-height:38px;}
   }
   @media(max-width:460px){
-    .video-grid{grid-auto-columns:88%;}
+    .video-grid{grid-auto-columns:84%;}
   }
 
   .video-card{
