@@ -1569,7 +1569,7 @@ function renderVideoCard(v, i, cardClass){
   const delay = (i % 3) * 90;
   const cls = cardClass || 'video-card';
   return `
-  <div class="${cls} reveal" style="transition-delay:${delay}ms;" data-cat="${v.cat}" data-curador="${v.curador}">
+  <div class="${cls}" style="transition-delay:${delay}ms;" data-cat="${v.cat}" data-curador="${v.curador}">
     <a href="#" class="video-thumb" style="background:linear-gradient(135deg, ${cat.hex} 0%, #0a1550 120%);" aria-label="Assistir: ${v.titulo}" data-video-id="${v.id}">
       ${v.cover ? `<img class="video-cover" src="${v.cover}" alt="Capa do conteúdo: ${v.titulo}" loading="lazy">` : catIconSvg(v.cat, 110)}
       <span class="featured-dur">${v.dur}</span>
@@ -1624,7 +1624,7 @@ function renderIndicacoes(){
     const cur = curadorById(n.curador);
     const delay = (i % 4) * 80;
     return `
-    <div class="indicacao-card-v2 reveal" style="transition-delay:${delay}ms;background:linear-gradient(160deg, ${n.cor} 0%, #0a0a12 145%);" data-indicacao-id="${n.id}">
+    <div class="indicacao-card-v2" style="transition-delay:${delay}ms;background:linear-gradient(160deg, ${n.cor} 0%, #0a0a12 145%);" data-indicacao-id="${n.id}">
       <img class="indicacao-cover" src="${n.imagem}" alt="Capa de ${n.titulo}" loading="lazy">
       <div class="indicacao-body">
         <span class="indicacao-tipo">${n.tipo}</span>
@@ -1987,10 +1987,7 @@ function initScrollReveal(){
   }
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('in-view');
-        io.unobserve(entry.target);
-      }
+      entry.target.classList.toggle('in-view', entry.isIntersecting);
     });
   }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
   els.forEach(el=>{ el.dataset.observed = '1'; io.observe(el); });
