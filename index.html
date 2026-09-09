@@ -430,7 +430,12 @@
   .stats-number span{color:rgba(255,255,255,.72);font-size:18px;margin-left:8px;letter-spacing:.02em;}
   .stats-caption{font-size:13px;color:rgba(255,255,255,.5);}
   .stats-caption b{color:rgba(255,255,255,.88);font-weight:700;}
+  @media(min-width:821px){
+    .hero .stats-section{position:absolute;left:0;right:0;bottom:28px;z-index:4;background:transparent;padding:0;}
+    .hero .stats-grid{background:rgba(19,19,19,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 20px 45px -28px rgba(19,19,19,.7);}
+  }
   @media(max-width:820px){
+    .hero .stats-section{position:relative;background:var(--ink);padding:28px 0;}
     .stats-section{padding:28px 0;}
     .stats-grid{grid-template-columns:1fr;}
     .stats-col{border-left:0;border-top:1px solid rgba(255,255,255,.12);padding:18px 16px;}
@@ -983,6 +988,27 @@
         </div>
       </div>
     </div>
+    <section class="stats-section reveal-section" aria-label="Números do Hub Criminal">
+     <div class="wrap">
+      <div class="stats-grid">
+        <div class="stats-col">
+          <div class="stats-index">01 / Criminalistas</div>
+          <div class="stats-number" data-count="7">0<span>curadores</span></div>
+          <div class="stats-caption"><b>Escritórios parceiros</b> · Advocacia criminal</div>
+        </div>
+        <div class="stats-col">
+          <div class="stats-index">02 / Cobertura</div>
+          <div class="stats-number" data-count="7">0<span>temas</span></div>
+          <div class="stats-caption"><b>Frentes do Direito Penal</b> · Sempre atualizado</div>
+        </div>
+        <div class="stats-col">
+          <div class="stats-index">03 / Conteúdo</div>
+          <div class="stats-number" data-count="960" data-prefix="+">0<span>vídeos</span></div>
+          <div class="stats-caption"><b>Publicados no Instagram</b> · Curadoria ativa</div>
+        </div>
+      </div>
+     </div>
+    </section>
   </section>
 
   <div class="topic-marquee reveal-section" aria-label="Princípios do Hub Criminal">
@@ -1007,29 +1033,6 @@
       </div>
     </div>
   </div>
-
-  <!-- NUMEROS -->
-  <section class="stats-section reveal-section">
-   <div class="wrap">
-    <div class="stats-grid">
-      <div class="stats-col">
-        <div class="stats-index">01 / Criminalistas</div>
-        <div class="stats-number" data-count="7">0<span>curadores</span></div>
-        <div class="stats-caption"><b>Escritórios parceiros</b> · Advocacia criminal</div>
-      </div>
-      <div class="stats-col">
-        <div class="stats-index">02 / Cobertura</div>
-        <div class="stats-number" data-count="7">0<span>temas</span></div>
-        <div class="stats-caption"><b>Frentes do Direito Penal</b> · Sempre atualizado</div>
-      </div>
-      <div class="stats-col">
-        <div class="stats-index">03 / Conteúdo</div>
-        <div class="stats-number" data-count="960" data-prefix="+">0<span>vídeos</span></div>
-        <div class="stats-caption"><b>Publicados no Instagram</b> · Curadoria ativa</div>
-      </div>
-    </div>
-   </div>
-  </section>
 
   <!-- DESTAQUE -->
   <section class="featured-section reveal-section">
