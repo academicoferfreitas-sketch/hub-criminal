@@ -1169,22 +1169,26 @@
 
     <div class="filter-bar reveal" style="justify-content:space-between;">
       <div class="filter-group" id="categoryFilters">
-        <button class="chip active" data-cat="todos">Todos os temas</button>
-        <button class="chip" data-cat="precedente" style="--chip-color:#1630b5;">O Precedente</button>
-        <button class="chip" data-cat="itercriminis" style="--chip-color:#a00202;">Iter Criminis</button>
-        <button class="chip" data-cat="contraditorio" style="--chip-color:#472287;">O Contraditório</button>
-        <button class="chip" data-cat="expediente" style="--chip-color:#6b7280;">Expediente Criminal</button>
-        <button class="chip" data-cat="ordemdodia" style="--chip-color:#c14010;">Ordem do Dia</button>
-        <button class="chip" data-cat="codigoaberto" style="--chip-color:#8fa915;">Código Aberto</button>
+        <button class="chip active" data-tema="todos">Todos os temas jurídicos</button>
+        <button class="chip" data-tema="prova" style="--chip-color:#c14010;">Provas e reconhecimento</button>
+        <button class="chip" data-tema="processo-penal" style="--chip-color:#1630b5;">Processo penal</button>
+        <button class="chip" data-tema="crimes-sexuais" style="--chip-color:#a00202;">Crimes sexuais e tecnologia</button>
+        <button class="chip" data-tema="drogas" style="--chip-color:#472287;">Drogas</button>
+        <button class="chip" data-tema="homicidio" style="--chip-color:#6b7280;">Homicídio e crimes contra a vida</button>
+        <button class="chip" data-tema="execucao-penal" style="--chip-color:#c14010;">Execução penal</button>
+        <button class="chip" data-tema="direitos-fundamentais" style="--chip-color:#1630b5;">Direitos fundamentais</button>
+        <button class="chip" data-tema="direito-penal-economico" style="--chip-color:#8fa915;">Direito penal econômico</button>
       </div>
       <select class="filter-select filter-select-mobile-cat" id="categoryFilterMobile">
-        <option value="todos">Todos os temas</option>
-        <option value="precedente">O Precedente</option>
-        <option value="itercriminis">Iter Criminis</option>
-        <option value="contraditorio">O Contraditório</option>
-        <option value="expediente">Expediente Criminal</option>
-        <option value="ordemdodia">Ordem do Dia</option>
-        <option value="codigoaberto">Código Aberto</option>
+        <option value="todos">Todos os temas jurídicos</option>
+        <option value="prova">Provas e reconhecimento</option>
+        <option value="processo-penal">Processo penal</option>
+        <option value="crimes-sexuais">Crimes sexuais e tecnologia</option>
+        <option value="drogas">Drogas</option>
+        <option value="homicidio">Homicídio e crimes contra a vida</option>
+        <option value="execucao-penal">Execução penal</option>
+        <option value="direitos-fundamentais">Direitos fundamentais</option>
+        <option value="direito-penal-economico">Direito penal econômico</option>
       </select>
       <select class="filter-select" id="curadorFilter">
         <option value="todos">Todos os curadores</option>
@@ -1196,16 +1200,14 @@
         <option value="emanuela">Emanuela de Araújo</option>
         <option value="bernardo">Bernardo Fenelon</option>
       </select>
-      <select class="filter-select" id="temaFilter" aria-label="Filtrar por tema jurídico">
-        <option value="todos">Todos os temas jurídicos</option>
-        <option value="prova">Provas e reconhecimento</option>
-        <option value="processo-penal">Processo penal</option>
-        <option value="crimes-sexuais">Crimes sexuais e tecnologia</option>
-        <option value="drogas">Drogas</option>
-        <option value="homicidio">Homicídio e crimes contra a vida</option>
-        <option value="execucao-penal">Execução penal</option>
-        <option value="direitos-fundamentais">Direitos fundamentais</option>
-        <option value="direito-penal-economico">Direito penal econômico</option>
+      <select class="filter-select" id="temaFilter" aria-label="Filtrar por editoria">
+        <option value="todos">Todas as editorias</option>
+        <option value="precedente">O Precedente</option>
+        <option value="itercriminis">Iter Criminis</option>
+        <option value="contraditorio">O Contraditório</option>
+        <option value="expediente">Expediente Criminal</option>
+        <option value="ordemdodia">Ordem do Dia</option>
+        <option value="codigoaberto">Código Aberto</option>
       </select>
     </div>
 
@@ -1684,13 +1686,13 @@ function wireVideoCardEvents(container){
 }
 
 let activeCategory = 'todos';
+let activeTema = 'todos';
 
 function renderGrid(){
   const grid = document.getElementById('videoGrid');
   const empty = document.getElementById('emptyState');
-  const activeCat = activeCategory;
+  const activeCat = document.getElementById('temaFilter').value;
   const activeCurador = document.getElementById('curadorFilter').value;
-  const activeTema = document.getElementById('temaFilter').value;
 
   const filtered = VIDEOS.filter(v => {
     const catOk = activeCat === 'todos' || v.cat === activeCat;
@@ -2040,19 +2042,22 @@ document.getElementById('categoryFilters').addEventListener('click', (e)=>{
   if(!btn) return;
   document.querySelectorAll('#categoryFilters .chip').forEach(c=>c.classList.remove('active'));
   btn.classList.add('active');
-  activeCategory = btn.dataset.cat;
-  document.getElementById('categoryFilterMobile').value = activeCategory;
+  activeTema = btn.dataset.tema;
+  document.getElementById('categoryFilterMobile').value = activeTema;
   renderGrid();
 });
 document.getElementById('categoryFilterMobile').addEventListener('change', (e)=>{
-  activeCategory = e.target.value;
+  activeTema = e.target.value;
   document.querySelectorAll('#categoryFilters .chip').forEach(c=>{
-    c.classList.toggle('active', c.dataset.cat === activeCategory);
+    c.classList.toggle('active', c.dataset.tema === activeTema);
   });
   renderGrid();
 });
 document.getElementById('curadorFilter').addEventListener('change', renderGrid);
-document.getElementById('temaFilter').addEventListener('change', renderGrid);
+document.getElementById('temaFilter').addEventListener('change', (e)=>{
+  activeCategory = e.target.value;
+  renderGrid();
+});
 
 const burgerBtn = document.getElementById('burgerBtn');
 const mobileMenu = document.getElementById('mobileMenu');
