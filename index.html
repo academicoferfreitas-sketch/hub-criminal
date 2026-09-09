@@ -470,7 +470,7 @@
     white-space:nowrap;transform:rotate(-4deg);
   }
   .featured-blob{
-    position:absolute;z-index:0;border-radius:50%;opacity:.32;pointer-events:none;filter:blur(3px);
+    position:absolute;z-index:0;border-radius:50%;opacity:.24;pointer-events:none;filter:blur(18px);will-change:filter,transform;
   }
   .featured-media{
     position:relative;z-index:1;display:block;border-radius:22px;overflow:hidden;
@@ -522,7 +522,7 @@
     .featured-layout .featured-title-v2{order:4;margin:4px 6px 0;}
     .featured-layout .featured-description{order:5;margin:4px 6px 0;}
     .featured-layout .curador-chip{order:6;margin:8px 6px 0;}
-    .featured-blob{display:none;}
+    .featured-blob{display:block;opacity:.2;filter:blur(14px);transform:scale(.68);}
     .featured-ghost{font-size:52px;}
     .featured-media{aspect-ratio:9/16;border-radius:16px;}
     .featured-overlay{padding:18px 18px;}
