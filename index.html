@@ -678,6 +678,18 @@
   }
   .curador-cta span{transition:transform .2s ease;display:inline-block;}
   .curador-cta:hover span{transform:translateX(4px);}
+  @media(max-width:700px){
+    .curadores-carousel{gap:14px;padding-right:4px;}
+    .curador-card-v2{flex-basis:170px;}
+    .curador-photo{border-radius:12px;}
+    .curador-info{padding-top:14px;}
+    .curador-label{font-size:10px;margin-bottom:5px;}
+    .curador-divider{width:24px;height:3px;margin-bottom:9px;}
+    .curador-name-v2{font-size:16px;margin-bottom:4px;}
+    .curador-role-v2{font-size:11.5px;line-height:1.3;margin-bottom:11px;}
+    .curador-cta{font-size:12px;}
+  }
+  @media(max-width:460px){.curador-card-v2{flex-basis:156px;}}
   .modal-social-links{grid-column:2;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px;margin-top:0;}
   .modal-social-link{display:flex;align-items:center;gap:8px;min-width:0;color:var(--ink);}
   .modal-social-link .social-icon{width:32px;height:32px;flex-shrink:0;}
