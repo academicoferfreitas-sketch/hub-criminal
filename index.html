@@ -460,6 +460,7 @@
 
   /* ---------- destaque ---------- */
   .featured-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start;}
+  .featured-section{padding-bottom:28px;}
   .featured-copy .section-head{margin-bottom:0;}
   .featured-wrap{position:relative;width:100%;max-width:280px;justify-self:center;margin:0;padding:20px 6px 6px;}
   .featured-ghost{
@@ -514,6 +515,7 @@
   .featured-overlay .curador-chip .role{color:rgba(255,255,255,.68);}
   .featured-note{position:relative;z-index:1;margin:16px 6px 0;font-size:13px;color:var(--ink-soft);}
   @media(max-width:600px){
+    .featured-section{padding-bottom:60px;}
     .featured-layout{grid-template-columns:1fr;gap:12px;}
     .featured-copy,.featured-info{display:contents;}
     .featured-layout .section-head{order:1;}
@@ -1030,7 +1032,7 @@
   </section>
 
   <!-- DESTAQUE -->
-  <section class="reveal-section">
+  <section class="featured-section reveal-section">
    <div class="wrap">
     <div class="featured-layout">
       <div class="featured-copy">
