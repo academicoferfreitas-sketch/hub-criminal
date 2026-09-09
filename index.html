@@ -720,20 +720,20 @@
   .contato-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
   @media(max-width:780px){.contato-grid{grid-template-columns:1fr;}}
   .contato h2{color:#fff;font-size:clamp(30px,4vw,42px);margin-bottom:16px;}
-  .contato p{color:#b9bcc6;font-size:15px;max-width:400px;}
+  .contato p{color:rgba(255,255,255,.92);font-size:15px;max-width:400px;}
   .contato-whatsapp{margin-top:24px;}
   .contato-cards{display:grid;gap:14px;}
   .contato-card{
-    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+    background:rgba(19,19,19,.16);border:1px solid rgba(255,255,255,.34);
     border-radius:14px;padding:20px 22px;position:relative;overflow:hidden;
     transition:transform .3s ease,border-color .3s ease,background-color .3s ease,box-shadow .3s ease;
   }
   .contato-card::before{content:"";position:absolute;top:0;left:0;width:0;height:2px;background:var(--rust);transition:width .4s cubic-bezier(.16,.8,.3,1);}
-  .contato-card:hover{transform:translateY(-4px);border-color:rgba(193,64,16,.65);background:rgba(255,255,255,.09);box-shadow:0 16px 28px -22px rgba(0,0,0,.7);}
+  .contato-card:hover{transform:translateY(-4px);border-color:#fff;background:rgba(19,19,19,.24);box-shadow:0 16px 28px -22px rgba(0,0,0,.7);}
   .contato-card:hover::before{width:100%;}
   .contato-card .kicker{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#ffcfbd;font-weight:700;}
   .contato-card .label{font-family:var(--font-display);font-weight:600;text-transform:uppercase;font-size:20px;margin:6px 0 6px;}
-  .contato-card p{color:#9598a5;font-size:13.5px;margin:0 0 12px;max-width:100%;}
+  .contato-card p{color:rgba(255,255,255,.88);font-size:13.5px;margin:0 0 12px;max-width:100%;}
   .contato-card .link{color:#fff;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px;}
   .contato-card .link:hover{color:#ffcfbd;}
 
@@ -742,7 +742,7 @@
   .footer-row{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
   .footer-logo-chip{display:inline-flex;align-items:center;background:transparent;padding:0;border-radius:0;}
   .footer-logo-chip .footer-logo{display:none;}
-  .footer-logo-chip::before{content:"";display:block;width:112px;height:34px;background:url("logo branco.png") center / 112px 34px no-repeat;}
+  .footer-logo-chip::before{content:"";display:block;width:112px;height:34px;background:url("logo branco.png") center / contain no-repeat;}
   .footer-note{font-size:12.5px;color:rgba(255,255,255,.6);max-width:520px;}
   .footer-links{display:flex;gap:22px;}
   .footer-links a{font-size:13px;color:rgba(255,255,255,.85);font-weight:600;}
