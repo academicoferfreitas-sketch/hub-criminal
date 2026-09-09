@@ -716,16 +716,16 @@
     background:var(--rust);color:#fff;border-radius:24px;
     padding:48px;position:relative;overflow:hidden;
   }
-  @media(max-width:700px){.contato{padding:40px 26px;}}
+  @media(max-width:700px){.contato{padding:26px 20px;}}
   .contato-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
-  @media(max-width:780px){.contato-grid{grid-template-columns:1fr;}}
-  .contato h2{color:#fff;font-size:clamp(30px,4vw,42px);margin-bottom:16px;}
+  @media(max-width:780px){.contato-grid{grid-template-columns:1fr;gap:22px;}}
+  .contato h2{color:#fff;font-size:clamp(30px,4vw,42px);margin-bottom:10px;}
   .contato p{color:rgba(255,255,255,.92);font-size:15px;max-width:400px;}
-  .contato-whatsapp{margin-top:24px;}
-  .contato-cards{display:grid;gap:14px;}
+  .contato-whatsapp{display:none;}
+  .contato-cards{display:grid;gap:10px;}
   .contato-card{
     background:rgba(19,19,19,.16);border:1px solid rgba(255,255,255,.34);
-    border-radius:14px;padding:20px 22px;position:relative;overflow:hidden;
+    border-radius:14px;padding:16px 18px;position:relative;overflow:hidden;
     transition:transform .3s ease,border-color .3s ease,background-color .3s ease,box-shadow .3s ease;
   }
   .contato-card::before{content:"";position:absolute;top:0;left:0;width:0;height:2px;background:var(--rust);transition:width .4s cubic-bezier(.16,.8,.3,1);}
@@ -749,8 +749,6 @@
   #contato .contato-card:hover{background:rgba(255,255,255,.28);border-color:var(--ink);}
   #contato .contato-card::before{background:var(--ink);}
   #contato .contato-card .link:hover{color:var(--ink);}
-  #contato .contato-whatsapp{background:var(--ink);color:#fff;}
-  #contato .contato-whatsapp .btn-dot{background:#000;}
 
   /* ---------- footer ---------- */
   footer{background:var(--ink);border-top:1px solid var(--ink);padding:36px 0;}
@@ -1261,11 +1259,6 @@
           <span class="eyebrow" style="color:#ffcfbd;">Contato</span>
           <h2>Fale com o Hub Criminal</h2>
           <p>Para assessoria, pauta ou dúvidas, fale com o time do Hub Criminal.</p>
-          <a class="btn btn-primary contato-whatsapp" href="https://wa.me/5561999898753?text=Ol%C3%A1%2C%20vim%20pelo%20site%20do%20Hub%20Criminal" target="_blank" rel="noopener">
-            <span class="btn-dot"></span>
-            <span class="btn-label">Fale Conosco <span aria-hidden="true">↗</span></span>
-            <span class="btn-label-hover">Fale Conosco <span aria-hidden="true">↗</span></span>
-          </a>
         </div>
         <div class="contato-cards">
           <div class="contato-card">
