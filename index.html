@@ -598,11 +598,11 @@
   }
   .video-card:hover{transform:none;box-shadow:0 18px 34px -20px rgba(19,19,19,.25);}
   .video-thumb{
-    position:relative;aspect-ratio:9/16;
+    position:relative;display:block;width:100%;aspect-ratio:9/16;flex:none;
     display:flex;align-items:center;justify-content:center;
   }
   .video-cover{
-    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    position:absolute;inset:0;width:100%;height:100%;aspect-ratio:9/16;object-fit:cover;
     z-index:0;
   }
   .video-thumb:has(.video-cover)::after{
@@ -616,9 +616,9 @@
   }
   .video-thumb .play-btn svg{width:16px;}
   .video-thumb .featured-dur{font-size:11.5px;padding:3px 8px;}
-  .video-body{padding:16px 18px 20px;}
-  .video-body .tag{margin-bottom:12px;}
-  .video-body h4{font-size:19px;line-height:1.15;margin-bottom:14px;min-height:44px;}
+  .video-body{padding:12px 16px 14px;}
+  .video-body .tag{margin-bottom:9px;}
+  .video-body h4{font-size:17px;line-height:1.12;margin-bottom:10px;min-height:38px;}
   .video-curador{display:flex;align-items:center;gap:9px;}
   .video-curador .avatar{width:28px;height:28px;font-size:11px;}
   .video-curador span{font-size:13px;font-weight:600;color:var(--ink-soft);}
@@ -1160,6 +1160,17 @@
         <option value="emanuela">Emanuela de Araújo</option>
         <option value="bernardo">Bernardo Fenelon</option>
       </select>
+      <select class="filter-select" id="temaFilter" aria-label="Filtrar por tema jurídico">
+        <option value="todos">Todos os temas jurídicos</option>
+        <option value="prova">Provas e reconhecimento</option>
+        <option value="processo-penal">Processo penal</option>
+        <option value="crimes-sexuais">Crimes sexuais e tecnologia</option>
+        <option value="drogas">Drogas</option>
+        <option value="homicidio">Homicídio e crimes contra a vida</option>
+        <option value="execucao-penal">Execução penal</option>
+        <option value="direitos-fundamentais">Direitos fundamentais</option>
+        <option value="direito-penal-economico">Direito penal econômico</option>
+      </select>
     </div>
 
     <div class="carousel-nav" style="justify-content:flex-end;margin-bottom:14px;">
@@ -1527,6 +1538,30 @@ const VIDEOS = [
    desc:"Do sequestro do ônibus 174 à Chacina da Candelária, o caso expõe décadas de falhas sistêmicas do Estado e levanta uma pergunta que o processo penal ainda não respondeu sozinho.",
    link:"https://www.instagram.com/p/DZNPgrjuSY_/"}
 ];
+const VIDEO_TEMAS = {
+  "A quebra da cadeia de custódia anula a prova?":"prova",
+  "Nude falso feito com IA é crime?":"crimes-sexuais",
+  "Ele foi assaltado e foi condenado a indenizar o criminoso":"direitos-fundamentais",
+  "Mercados de previsão: aposta ou investimento?":"direito-penal-economico",
+  "O caso Ronald Cotton e a falha do reconhecimento":"prova",
+  "STJ e a presunção de vulnerabilidade: a lei pode retroagir?":"processo-penal",
+  "O caso Elize Matsunaga: o que diz a lei":"homicidio",
+  "Maconha: descriminalizar não é legalizar":"drogas",
+  "280 anos de pena, menos de 30 no total: por quê?":"execucao-penal",
+  "Abrir a porta não é abrir mão dos seus direitos":"direitos-fundamentais",
+  "O limite de internação do ECA: 3 anos é suficiente?":"execucao-penal",
+  "STF pode criar exceção que a lei não prevê?":"processo-penal",
+  "Pena de morte no Brasil: a favor ou contra?":"homicidio",
+  "Reforma do Código Penal: o que muda":"processo-penal",
+  "Quem responde pela publicidade de apostas?":"direito-penal-economico",
+  "PL da Dosimetria: o STF pode suspender uma lei?":"execucao-penal",
+  "Toda condenação merece uma segunda chance?":"processo-penal",
+  "Quando o futebol vai parar no STF":"direito-penal-economico",
+  "O perdão judicial e o caso que dividiu o STF":"processo-penal",
+  "O crime custa R$107 bilhões por ano à indústria":"direito-penal-economico",
+  "Ônibus 174: quando o Estado falha com uma criança":"homicidio"
+};
+VIDEOS.forEach(v => { v.tema = VIDEO_TEMAS[v.titulo] || 'processo-penal'; });
 VIDEOS.forEach((v,i)=> v.id = i);
 
 // Indicações — livros e obras indicadas por cada curador.
@@ -1574,7 +1609,7 @@ function renderVideoCard(v, i, cardClass){
   const delay = (i % 3) * 90;
   const cls = cardClass || 'video-card';
   return `
-  <div class="${cls}" style="transition-delay:${delay}ms;" data-cat="${v.cat}" data-curador="${v.curador}">
+  <div class="${cls}" style="transition-delay:${delay}ms;" data-cat="${v.cat}" data-curador="${v.curador}" data-tema="${v.tema}">
     <a href="#" class="video-thumb" style="background:linear-gradient(135deg, ${cat.hex} 0%, #0a1550 120%);" aria-label="Assistir: ${v.titulo}" data-video-id="${v.id}">
       ${v.cover ? `<img class="video-cover" src="${v.cover}" alt="Capa do conteúdo: ${v.titulo}" loading="lazy">` : catIconSvg(v.cat, 110)}
       <span class="featured-dur">${v.dur}</span>
@@ -1606,11 +1641,13 @@ function renderGrid(){
   const empty = document.getElementById('emptyState');
   const activeCat = activeCategory;
   const activeCurador = document.getElementById('curadorFilter').value;
+  const activeTema = document.getElementById('temaFilter').value;
 
   const filtered = VIDEOS.filter(v => {
     const catOk = activeCat === 'todos' || v.cat === activeCat;
     const curOk = activeCurador === 'todos' || v.curador === activeCurador;
-    return catOk && curOk;
+    const temaOk = activeTema === 'todos' || v.tema === activeTema;
+    return catOk && curOk && temaOk;
   });
 
   grid.innerHTML = filtered.map((v,i)=> renderVideoCard(v,i)).join('');
@@ -1966,6 +2003,7 @@ document.getElementById('categoryFilterMobile').addEventListener('change', (e)=>
   renderGrid();
 });
 document.getElementById('curadorFilter').addEventListener('change', renderGrid);
+document.getElementById('temaFilter').addEventListener('change', renderGrid);
 
 const burgerBtn = document.getElementById('burgerBtn');
 const mobileMenu = document.getElementById('mobileMenu');
