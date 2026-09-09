@@ -157,8 +157,8 @@
   .hero > .wrap{max-width:none;padding-left:0;padding-right:0;}
   .hero-banner-wrap{border-radius:0;box-shadow:none;}
   .hero-banner-actions{
-    position:absolute;left:0;right:0;bottom:22px;z-index:2;
-    display:flex;justify-content:center;gap:14px;flex-wrap:wrap;
+    position:absolute;left:clamp(32px,5vw,96px);right:auto;bottom:clamp(28px,6vh,60px);z-index:2;
+    display:flex;justify-content:flex-start;gap:14px;flex-wrap:wrap;
   }
   .topic-marquee{
     overflow:hidden;background:var(--rust);border-bottom:1px solid rgba(160,2,2,.45);
