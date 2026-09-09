@@ -457,7 +457,7 @@
   /* ---------- destaque ---------- */
   .featured-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start;}
   .featured-copy .section-head{margin-bottom:0;}
-  .featured-wrap{position:relative;width:100%;max-width:380px;justify-self:center;margin:0;padding:20px 6px 6px;}
+  .featured-wrap{position:relative;width:100%;max-width:280px;justify-self:center;margin:0;padding:20px 6px 6px;}
   .featured-ghost{
     position:absolute;z-index:0;pointer-events:none;
     font-family:var(--font-display);font-weight:600;text-transform:uppercase;
@@ -470,21 +470,12 @@
   }
   .featured-media{
     position:relative;z-index:1;display:block;border-radius:22px;overflow:hidden;
-    aspect-ratio:1/1;
+    aspect-ratio:9/16;
     background:linear-gradient(135deg,var(--blue) 0%, var(--blue-deep) 60%, #0a1550 100%);
     box-shadow:0 30px 60px -28px rgba(19,19,19,.4);
   }
   .featured-cover{
     position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  }
-  .featured-media::before{
-    content:"";position:absolute;inset:0;
-    background-image:radial-gradient(circle at 20% 20%, rgba(255,255,255,.12), transparent 40%),
-      radial-gradient(circle at 80% 80%, rgba(255,255,255,.08), transparent 45%);
-  }
-  .featured-media::after{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(to top, rgba(0,0,0,.96) 0%, rgba(0,0,0,.74) 48%, rgba(0,0,0,.18) 78%, transparent 100%);
   }
   .play-btn{
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
@@ -499,7 +490,7 @@
     font-size:12.5px;padding:4px 10px;border-radius:6px;font-weight:600;
   }
   .featured-overlay{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:26px 32px;}
-  .featured-info{margin:20px 6px 0;}
+  .featured-info{margin:88px 6px 0;}
   .featured-info .featured-title-v2{color:var(--ink);margin:10px 0 12px;max-width:580px;}
   .featured-info .featured-description{color:var(--ink-soft);margin-bottom:18px;}
   .featured-info .curador-chip .name{color:var(--ink);}
@@ -522,14 +513,14 @@
     .featured-layout{grid-template-columns:1fr;gap:12px;}
     .featured-copy,.featured-info{display:contents;}
     .featured-layout .section-head{order:1;}
-    .featured-layout .featured-wrap{order:2;max-width:none;padding:8px 4px 0;}
+    .featured-layout .featured-wrap{order:2;width:min(100%,240px);max-width:240px;justify-self:center;padding:8px 4px 0;}
     .featured-layout .tag{order:3;justify-self:start;width:max-content;margin:8px 6px 0;}
     .featured-layout .featured-title-v2{order:4;margin:4px 6px 0;}
     .featured-layout .featured-description{order:5;margin:4px 6px 0;}
     .featured-layout .curador-chip{order:6;margin:8px 6px 0;}
     .featured-blob{display:none;}
     .featured-ghost{font-size:52px;}
-    .featured-media{aspect-ratio:16/9;border-radius:16px;}
+    .featured-media{aspect-ratio:9/16;border-radius:16px;}
     .featured-overlay{padding:18px 18px;}
     .featured-title-v2{font-size:17px;margin:10px 0 12px;}
     .tag{font-size:11px;padding:4px 10px;}
@@ -673,7 +664,7 @@
     transition:transform .45s cubic-bezier(.16,.8,.3,1);
   }
   .curador-photo:has(.curador-photo-img)::after{display:none;}
-  .curador-photo:hover .curador-photo-img{transform:scale(1.045);}
+  .curador-photo:hover .curador-photo-img{transform:translateY(-10px) scale(1.1);}
   .curador-info{padding-top:22px;}
   .curador-label{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px;}
   .curador-divider{display:block;width:28px;height:3px;border-radius:2px;margin-bottom:13px;}
@@ -685,9 +676,14 @@
   }
   .curador-cta span{transition:transform .2s ease;display:inline-block;}
   .curador-cta:hover span{transform:translateX(4px);}
-  .modal-social-links{display:flex;align-items:center;gap:8px;margin-top:12px;}
-  .modal-social-links .social-icon{width:32px;height:32px;}
-  .modal-social-label{font-size:12px;font-weight:600;color:var(--gray);}
+  .modal-social-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px;margin-top:12px;}
+  .modal-social-link{display:flex;align-items:center;gap:8px;min-width:0;color:var(--ink);}
+  .modal-social-link .social-icon{width:32px;height:32px;flex-shrink:0;}
+  .modal-social-link:hover .social-icon{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .modal-social-link-text{display:flex;flex-direction:column;min-width:0;line-height:1.15;}
+  .modal-social-link-name{font-size:11px;font-weight:700;text-transform:uppercase;}
+  .modal-social-link-url{font-size:10.5px;color:var(--gray);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  @media(max-width:520px){.modal-social-links{grid-template-columns:1fr;}}
 
   /* ---------- critério de curadoria ---------- */
   .criterio-box{
@@ -766,14 +762,15 @@
   }
   .modal-close:hover{background:var(--ink);border-color:var(--ink);color:#fff;}
   .modal-head{
-    padding:40px 36px 28px;display:flex;gap:20px;align-items:flex-start;
+    padding:40px 36px 28px;display:grid;grid-template-columns:128px minmax(0,1fr);gap:20px;align-items:stretch;
     border-bottom:1px solid var(--line);
   }
-  .modal-head .avatar{width:72px;height:72px;font-size:24px;flex-shrink:0;overflow:hidden;background:transparent;}
-  .modal-head .avatar img{width:100%;height:100%;display:block;object-fit:contain;object-position:center;}
+  .modal-photo{width:128px;overflow:hidden;background:transparent !important;}
+  .modal-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top;transform:scale(1.28);transform-origin:center top;}
   .modal-head h3{font-size:24px;margin-bottom:4px;}
   .modal-head .role{font-size:13.5px;color:var(--blue);font-weight:600;margin-bottom:10px;}
   .modal-head .bio{font-size:14px;color:var(--ink-soft);}
+  @media(max-width:520px){.modal-head{grid-template-columns:92px minmax(0,1fr);gap:14px;padding:32px 22px 22px;}.modal-photo{width:92px;}.modal-head h3{font-size:20px;}}
   .modal-body{padding:26px 36px 36px;}
   .video-content-modal .modal-body{padding:20px 30px 24px;}
   @media(max-width:640px){.modal-backdrop{padding:12px;}.video-content-modal{max-height:calc(100vh - 24px);}.video-content-modal .modal-body{padding:16px 20px 20px;}}
@@ -1337,22 +1334,28 @@
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
     <div class="modal-head">
-      <div class="avatar" id="modalAvatar">CR</div>
+      <div class="modal-photo" id="modalAvatar">CR</div>
       <div>
         <h3 id="modalName">Nome</h3>
         <div class="role" id="modalRole">Cargo</div>
         <p class="bio" id="modalBio">Bio</p>
         <div class="modal-social-links">
-          <a class="social-icon" id="modalInstagramIcon" href="#" target="_blank" rel="noopener" aria-label="Instagram pessoal">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>
+          <a class="modal-social-link" id="modalInstagramIcon" href="#" target="_blank" rel="noopener" aria-label="Instagram pessoal">
+            <span class="social-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg></span>
+            <span class="modal-social-link-text"><span class="modal-social-link-name">Instagram</span><span class="modal-social-link-url" id="modalInstagramUrl"></span></span>
           </a>
-          <a class="social-icon" id="modalLinkedinIcon" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><line x1="7.5" y1="10.5" x2="7.5" y2="17"/><circle cx="7.5" cy="7" r="0.6" fill="currentColor" stroke="none"/><path d="M11.5 17v-4.2c0-1.6 1-2.4 2.3-2.4s2.2.9 2.2 2.4V17"/><line x1="11.5" y1="10.5" x2="11.5" y2="17"/></svg>
+          <a class="modal-social-link" id="modalLinkedinIcon" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <span class="social-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><line x1="7.5" y1="10.5" x2="7.5" y2="17"/><circle cx="7.5" cy="7" r="0.6" fill="currentColor" stroke="none"/><path d="M11.5 17v-4.2c0-1.6 1-2.4 2.3-2.4s2.2.9 2.2 2.4V17"/><line x1="11.5" y1="10.5" x2="11.5" y2="17"/></svg></span>
+            <span class="modal-social-link-text"><span class="modal-social-link-name">LinkedIn</span><span class="modal-social-link-url" id="modalLinkedinUrl"></span></span>
           </a>
-          <a class="social-icon" id="modalEscritorioIcon" href="#" target="_blank" rel="noopener" aria-label="Instagram do escritório">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>
+          <a class="modal-social-link" id="modalSiteIcon" href="#" target="_blank" rel="noopener" aria-label="Site do escritório">
+            <span class="social-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.3 2.5 3.5 5.5 3.5 9S14.3 18.5 12 21c-2.3-2.5-3.5-5.5-3.5-9S9.7 5.5 12 3z"/></svg></span>
+            <span class="modal-social-link-text"><span class="modal-social-link-name">Site</span><span class="modal-social-link-url" id="modalSiteUrl"></span></span>
           </a>
-          <span class="modal-social-label" id="modalEscritorioLabel">@escritorio</span>
+          <a class="modal-social-link" id="modalEscritorioIcon" href="#" target="_blank" rel="noopener" aria-label="Instagram do escritório">
+            <span class="social-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg></span>
+            <span class="modal-social-link-text"><span class="modal-social-link-name">Escritório</span><span class="modal-social-link-url" id="modalEscritorioUrl"></span></span>
+          </a>
         </div>
       </div>
     </div>
@@ -1749,18 +1752,29 @@ function restartModalAnim(backdropEl){
   modalEl.style.animation = '';
 }
 
+const ESCRITORIO_SITES = {
+  "@kv_adv":"https://kv.adv.br/",
+  "@macadvs":"https://macadvogados.com.br/",
+  "@emanueladearaujo_":"https://emanueladearaujo.com.br/",
+  "@bfa.law":"https://bernardofenelon.com.br/"
+};
+
 function openModal(curadorId){
   const c = curadorById(curadorId);
   if(!c) return;
-  document.getElementById('modalAvatar').style.background = c.cor;
+  document.getElementById('modalAvatar').style.background = 'transparent';
   document.getElementById('modalAvatar').innerHTML = c.foto ? `<img src="${c.foto}" alt="Foto de ${c.nome}">` : c.iniciais;
   document.getElementById('modalName').textContent = c.nome;
   document.getElementById('modalRole').textContent = c.role;
   document.getElementById('modalBio').textContent = c.bio;
   document.getElementById('modalInstagramIcon').href = `https://www.instagram.com/${c.instagram.replace('@','')}/`;
   document.getElementById('modalLinkedinIcon').href = c.linkedin;
+  document.getElementById('modalSiteIcon').href = ESCRITORIO_SITES[c.escritorioInstagram] || '#';
   document.getElementById('modalEscritorioIcon').href = `https://www.instagram.com/${c.escritorioInstagram.replace('@','')}/`;
-  document.getElementById('modalEscritorioLabel').textContent = c.escritorioInstagram;
+  document.getElementById('modalInstagramUrl').textContent = c.instagram;
+  document.getElementById('modalLinkedinUrl').textContent = c.linkedin.replace(/^https?:\/\//,'').replace(/\/$/,'');
+  document.getElementById('modalSiteUrl').textContent = (ESCRITORIO_SITES[c.escritorioInstagram] || 'Não informado').replace(/^https?:\/\//,'').replace(/\/$/,'');
+  document.getElementById('modalEscritorioUrl').textContent = c.escritorioInstagram;
 
   const vids = VIDEOS.filter(v => v.curador === curadorId);
   document.getElementById('modalVideos').innerHTML = vids.map(v => {
